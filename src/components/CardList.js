@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import Card from './Card'
 
 
@@ -9,5 +9,10 @@ const CardList = ({mountains, updateSelection}) => (
     )}
   </div>
 )
+
+CardList.propTypes = {
+  mountains: PropTypes.array.isRequired,
+  updateSelection: PropTypes.func.isRequired
+}
 
 export default CardList

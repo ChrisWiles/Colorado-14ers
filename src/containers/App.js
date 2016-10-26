@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import { connect } from 'react-redux'
 
 import '../../node_modules/picnic/releases/picnic.min.css'
 
 import getVisibleMountains from '../helpers/getVisibleMountains'
 import mountains from '../data/mountains'
-import { updateSelection } from '../actions'
+import { updateSelection, updateQuery} from '../actions'
 
 import CardList from '../components/CardList'
 import MarkerList from '../components/MarkerList'
@@ -15,11 +15,16 @@ const App = (props) => (
   <div className="App flex two">
     <MarkerList {...props}/>
     <div id="filters-container">
-      <SearchFilters />
+      <SearchFilters updateQuery={props.updateQuery}/>
       <CardList {...props}/>
     </div>
   </div>
 )
+
+App.propTypes = {
+  mountains: PropTypes.array.isRequired,
+  currentSelections: PropTypes.object.isRequired
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -34,5 +39,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  {updateSelection}
+  {updateSelection, updateQuery}
 )(App)

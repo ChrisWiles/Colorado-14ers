@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 
-export default class Card extends Component {
+class Card extends Component {
 
   showInfoWindow(properties, coordinates, event) {
     let position = {
@@ -44,3 +44,10 @@ export default class Card extends Component {
     )
   }
 }
+
+Card.propTypes = {
+  updateSelection: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired
+}
+
+export default Card

@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { GoogleMapLoader, GoogleMap, Marker, InfoWindow } from "react-google-maps"
 
-export default class MarkerList extends Component {
+class MarkerList extends Component {
 
   constructor(props, context) {
   	super(props, context)
@@ -86,3 +86,10 @@ export default class MarkerList extends Component {
 		)
 	}
 }
+
+MarkerList.propTypes = {
+  mountains: PropTypes.array.isRequired,
+  currentSelections: PropTypes.object.isRequired
+}
+
+export default MarkerList
