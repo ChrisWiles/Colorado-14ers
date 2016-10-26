@@ -32,15 +32,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateSelection: (key, position, showInfoWindow) => {
-      dispatch(updateSelection(key, position, showInfoWindow))
-    }
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  {updateSelection}
 )(App)
