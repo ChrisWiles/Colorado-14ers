@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import InputRange from 'react-input-range'
 import '../../node_modules/react-input-range/dist/react-input-range.css'
 
 import filters from '../data/filters'
-import { updateQuery } from '../actions'
 
 class SearchFilters extends Component {
 
@@ -13,9 +12,7 @@ class SearchFilters extends Component {
   }
 
   updateStore() {
-    this.context.store.dispatch(
-      updateQuery(this.state.query, this.state.show_filters, this.state.filters)
-    )
+    this.props.updateQuery(this.state.query, this.state.show_filters, this.state.filters)
   }
 
   onQueryChange(event) {
@@ -27,9 +24,8 @@ class SearchFilters extends Component {
   }
 
   toggleFilters(event) {
-    var show_filters = !this.state.show_filters
     this.setState({
-      show_filters
+      show_filters: !this.state.show_filters
     })
   }
 
@@ -45,6 +41,7 @@ class SearchFilters extends Component {
   }
 
   render() {
+    const {show_filters, filters} = this.state
     return (
       <div className="search-filters">
         <div className="query-container">
@@ -55,7 +52,7 @@ class SearchFilters extends Component {
           </label>
         </div>
 
-        <div className={this.state.show_filters ? '' : 'hidden'}>
+        <div className={show_filters ? '' : 'hidden'}>
           <ul className="ranges">
             <li>
               <div className="label-text">Elevation</div>
@@ -64,7 +61,7 @@ class SearchFilters extends Component {
                   <InputRange
                     maxValue={15000}
                     minValue={10000}
-                    value={this.state.filters.elevation_height}
+                    value={filters.elevation_height}
                     labelSuffix=" ft"
                     onChange={this.updateFilter.bind(this, 'elevation_height')}
                   />
@@ -73,7 +70,7 @@ class SearchFilters extends Component {
                   <InputRange
                     maxValue={5000}
                     minValue={2000}
-                    value={this.state.filters.elevation_distance}
+                    value={filters.elevation_distance}
                     labelSuffix=" m"
                     onChange={this.updateFilter.bind(this, 'elevation_distance')}
                   />
@@ -88,7 +85,7 @@ class SearchFilters extends Component {
                   <InputRange
                     maxValue={5000}
                     minValue={300}
-                    value={this.state.filters.prominence_height}
+                    value={filters.prominence_height}
                     labelSuffix=" ft"
                     onChange={this.updateFilter.bind(this, 'prominence_height')}
                   />
@@ -97,7 +94,7 @@ class SearchFilters extends Component {
                   <InputRange
                     maxValue={3000}
                     minValue={90}
-                    value={this.state.filters.prominence_distance}
+                    value={filters.prominence_distance}
                     labelSuffix=" m"
                     onChange={this.updateFilter.bind(this, 'prominence_distance')}
                   />
@@ -112,7 +109,7 @@ class SearchFilters extends Component {
                   <InputRange
                     maxValue={700}
                     minValue={1}
-                    value={this.state.filters.isolation_height}
+                    value={filters.isolation_height}
                     labelSuffix=" mi"
                     onChange={this.updateFilter.bind(this, 'isolation_height')}
                   />
@@ -121,7 +118,7 @@ class SearchFilters extends Component {
                   <InputRange
                     maxValue={2000}
                     minValue={0}
-                    value={this.state.filters.isolation_distance}
+                    value={filters.isolation_distance}
                     labelSuffix=" km"
                     onChange={this.updateFilter.bind(this, 'isolation_distance')}
                   />
@@ -136,5 +133,8 @@ class SearchFilters extends Component {
 
 }
 
-SearchFilters.contextTypes = { store: React.PropTypes.object }
+SearchFilters.propTypes = {
+  updateQuery: PropTypes.func.isRequired
+}
+
 export default SearchFilters
