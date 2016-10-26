@@ -846,6 +846,6 @@ const mountains = [{
               "isolation": [1.3, 2.1]
           },
           "photo": "sunshine_peak.jpg"
-      }]
+      }];
 
-export default mountains
+export default mountains;
