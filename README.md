@@ -33,5 +33,3 @@ Install the dependencies and devDependencies and start the server.
 npm install
 npm run
 ```
-----
-##Todos
